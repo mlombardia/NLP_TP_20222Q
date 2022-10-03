@@ -1,5 +1,6 @@
-import requests
 from datetime import date, timedelta
+
+import requests
 
 URL_prefix = "https://tapas.clarin.com/tapa"
 
@@ -12,16 +13,18 @@ def daterange(start_date, end_date):
 # URL = prefix/year/month/day/year+month+day.jpg
 # first date is Aug 28th, 1945
 
-start_date = date(1945, 8, 28)
+start_date = date(2021, 8, 28)
 end_date = date(2022, 8, 28)
 for sd in daterange(start_date, end_date):
     URL = URL_prefix + "/{}/{}/{}/".format(sd.strftime("%Y"), sd.strftime("%m"), sd.strftime("%d")) + sd.strftime(
         "%Y") + sd.strftime("%m") + sd.strftime("%d") + ".jpg"
     try:
-        response = requests.get(URL)
-        open("C:/data/" + sd.strftime("%Y") + sd.strftime("%m") + sd.strftime("%d") + ".jpg", "wb").write(response.content)
+      print(sd.strftime("%Y") + sd.strftime("%m") + sd.strftime("%d"))
+      response = requests.get(URL)
+      open("../../Documents/data/" + sd.strftime("%Y") + sd.strftime("%m") + sd.strftime("%d") + ".jpg", "wb").write(response.content)
     except:
-        print("No se pudo obtener: " + URL)
+      print("No se pudo obtener: " + URL)
+
 
 # for year in range(1945, 2023):
 #     year_str = str(year)
